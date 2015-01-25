@@ -18,12 +18,15 @@ class ViewController: UIViewController {
     @IBOutlet weak var maxTempLabel: UILabel!
     @IBOutlet weak var minTempLabel: UILabel!
     @IBOutlet weak var pressureLabel: UILabel!
+    @IBOutlet weak var DTLabel: UILabel!
     
     override func viewDidLoad() {
+        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "blurry.jpg")!)
+        
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        let location:String = "wuerzburg"
+        let location:String = "manila"
         let wuWeatherURL: NSURL = NSURL(string:"http://api.openweathermap.org/data/2.5/weather?q=\(location)")!
         let request:NSURLRequest = NSURLRequest(URL: wuWeatherURL)
       
@@ -71,6 +74,8 @@ class ViewController: UIViewController {
                                                                 self.pressureLabel.text = "\(weatherNew.pressure)"
                                                                 self.locationLabel.text = "\(locNew.name)"
                                                                 self.cloud.image = UIImage(named: "\(weatherNew.weatherMain.rawValue)")
+                                                                let dt: String = "\(weatherNew.DT)"
+                                                                self.DTLabel.text = dt.substringToIndex(advance(dt.startIndex, countElements(dt)-5))
                                                             })
                                                             
                                                             
